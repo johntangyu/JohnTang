@@ -1,8 +1,30 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import { auth, db } from '@/firebase.js'
-import { onAuthStateChanged, reload } from 'firebase/auth'
-import { doc, setDoc, serverTimestamp } from 'firebase/firestore'
+import Home from '@/views/Home.vue'
 
-import Home from '@/components/Home.vue'
+const routes = [
+    { 
+        path: '/',
+        name: 'Home',
+        component: Home
+    },
 
+    {
+        path: '/achievements',
+        name: 'Achievements',
+        component: () => import('@/views/Achievements.vue')
+    }, 
+
+    {
+        path: '/experiences',
+        name: 'Experiences',
+        component: () => import('@/views/Experiences.vue')
+    }
+]
+
+const router = createRouter({
+    history: createWebHistory(),
+    routes
+})
+
+export default router
 
