@@ -1,41 +1,105 @@
 <template>
   <nav ref="navRef">
-    <router-link to="/">Home</router-link>
-    <router-link to="/experiences">Experiences</router-link>
-    <router-link to="/achievements">Achievements</router-link>
+    <a href="#home" @click.prevent="scrollTo('#home')">About</a>
+    <a href="#experiences" @click.prevent="scrollTo('#experiences')">Experiences</a>
+    <a href="#achievements" @click.prevent="scrollTo('#achievements')">Achievements</a>
+    <a href="#contact" @click.prevent="scrollTo('#contact')">Contact</a>
     <div class="nav-indicator" :style="indicatorStyle"></div>
   </nav>
 
   <main>
-    <router-view /> 
+    <section id="home" class="page-section">
+      <Home />
+    </section>
+    <section id="experiences" class="page-section">
+      <Experiences />
+    </section>
+    <section id="achievements" class="page-section">
+      <Achievements />
+    </section>
+    <section id="contact" class="page-section">
+      <Contact />
+    </section>
   </main>
 </template>
 
 <script setup>
-  import { ref, onMounted, watch, computed } from 'vue';
-  import { useRoute } from 'vue-router';
+  import { ref, onMounted, watch, computed, onUnmounted } from 'vue';
+  import Home from './views/Home.vue';
+  import Experiences from './views/Experiences.vue';
+  import Achievements from './views/Achievements.vue';
+  import Contact from './views/Contact.vue';
 
-  const route = useRoute();
   const navRef = ref(null);
   const indicatorStyle = ref({ width: '0px', left: '0px' });
+  const activeSection = ref('#home');
 
-  const updateIndicator = () => {
+  let isManualScrolling = false;
+
+  const scrollTo = (selector) => {
+    if (activeSection.value === selector) return;
+
+    isManualScrolling = true;
+    activeSection.value = selector;
+    updateIndicator(); 
+
+    const element = document.querySelector(selector);
+    if (element) {
+      window.scrollTo({
+        top: element.offsetTop - 80, 
+        behavior: 'smooth'
+      });
+    }
     setTimeout(() => {
-      if (!navRef.value) return;
-
-      const activeLink = navRef.value.querySelector('.router-link-active');
-      
-      if (activeLink) {
-        indicatorStyle.value = {
-          width: `${activeLink.offsetWidth}px`,
-          left: `${activeLink.offsetLeft}px`,
-        };
-      }
-    }, 50);
+      isManualScrolling = false;
+    }, 1000);
   };
 
-  onMounted(updateIndicator);
-  watch(() => route.path, updateIndicator);
+  const updateIndicator = () => {
+    if (!navRef.value) return;
+
+    const links = navRef.value.querySelectorAll('a');
+    let activeLink = null;
+    
+    links.forEach(link => {
+      if (link.getAttribute('href') === activeSection.value) {
+        activeLink = link;
+      }
+    });
+
+    if (activeLink) {
+      indicatorStyle.value = {
+        width: `${activeLink.offsetWidth}px`,
+        left: `${activeLink.offsetLeft}px`,
+      };
+    }
+  };
+
+  const handleScroll = () => {
+    if (isManualScrolling) return;
+
+    const sections = document.querySelectorAll('.page-section');
+    const scrollPosition = window.scrollY + 100;
+
+    sections.forEach(section => {
+      if (scrollPosition >= section.offsetTop && scrollPosition < section.offsetTop + section.offsetHeight) {
+        const id = `#${section.getAttribute('id')}`;
+        if (activeSection.value !== id) {
+          activeSection.value = id;
+          updateIndicator();
+        }
+      }
+    });
+  };
+
+  onMounted(() => {
+    window.addEventListener('scroll', handleScroll);
+    setTimeout(updateIndicator, 100);
+  });
+
+  onUnmounted(() => {
+    window.removeEventListener('scroll', handleScroll);
+  });
 </script>
 
 <style scoped>
@@ -75,6 +139,7 @@
     width: 100px;
     border: none;
     outline: none;
+    transition: color 0.3s ease;
   }
 
   nav a.router-link-active {
@@ -98,8 +163,20 @@
     transition: all 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55); 
     z-index: 1;
   }
+
   main {
     padding-top: 100px;
   }
 
+  .page-section {
+    min-height: 100vh; 
+    padding: 40px;
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid #eee;  
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
 </style>
