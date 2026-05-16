@@ -2,8 +2,9 @@
   <nav ref="navRef">
     <a href="#home" @click.prevent="scrollTo('#home')">About</a>
     <a href="#experiences" @click.prevent="scrollTo('#experiences')">Experiences</a>
+    <a href="#projects" @click.prevent="scrollTo('#projects')">Projects</a>
     <a href="#achievements" @click.prevent="scrollTo('#achievements')">Achievements</a>
-    <a href="#contact" @click.prevent="scrollTo('#contact')">Contact</a>
+
     <div class="nav-indicator" :style="indicatorStyle"></div>
   </nav>
 
@@ -13,6 +14,9 @@
     </section>
     <section id="experiences" class="page-section">
       <Experiences />
+    </section>
+    <section id="projects" class="page-section">
+      <Projects />
     </section>
     <section id="achievements" class="page-section">
       <Achievements />
@@ -24,9 +28,10 @@
 </template>
 
 <script setup>
-  import { ref, onMounted, watch, computed, onUnmounted } from 'vue';
+  import { ref, onMounted, watch, computed, onUnmounted, nextTick} from 'vue';
   import Home from './views/Home.vue';
   import Experiences from './views/Experiences.vue';
+  import Projects from './views/Projects.vue';
   import Achievements from './views/Achievements.vue';
   import Contact from './views/Contact.vue';
 
@@ -34,12 +39,9 @@
   const indicatorStyle = ref({ width: '0px', left: '0px' });
   const activeSection = ref('#home');
 
-  let isManualScrolling = false;
+  let observer = null;
 
   const scrollTo = (selector) => {
-    if (activeSection.value === selector) return;
-
-    isManualScrolling = true;
     activeSection.value = selector;
     updateIndicator(); 
 
@@ -50,9 +52,6 @@
         behavior: 'smooth'
       });
     }
-    setTimeout(() => {
-      isManualScrolling = false;
-    }, 1000);
   };
 
   const updateIndicator = () => {
@@ -72,6 +71,8 @@
         width: `${activeLink.offsetWidth}px`,
         left: `${activeLink.offsetLeft}px`,
       };
+    } else {
+      indicatorStyle.value = { width: '0px', left: '0px' };
     }
   };
 
@@ -92,13 +93,39 @@
     });
   };
 
-  onMounted(() => {
-    window.addEventListener('scroll', handleScroll);
-    setTimeout(updateIndicator, 100);
+  onMounted(async () => {
+    await nextTick();
+
+    if (document.fonts) {
+      await document.fonts.ready;
+    }
+    
+    updateIndicator();
+    window.addEventListener('resize', updateIndicator);
+    const observerOptions = {
+      root: null,
+      rootMargin: '-40% 0px -50% 0px',
+      threshold: 0
+    };
+
+    observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = `#${entry.target.getAttribute('id')}`;
+          activeSection.value = id;
+          updateIndicator();
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.page-section').forEach(section => {
+      observer.observe(section);
+    });
   });
 
   onUnmounted(() => {
-    window.removeEventListener('scroll', handleScroll);
+    if (observer) observer.disconnect();
+    window.removeEventListener('resize', updateIndicator);
   });
 </script>
 
@@ -133,6 +160,7 @@
     text-decoration: none;
     text-decoration: none;
     color: #2c3e50;
+    font-family:'Cormorant Garamond',serif;
     font-weight: bold;
     text-align: center;
     z-index: 2;
@@ -148,6 +176,11 @@
     border-bottom: none;
     
   }
+
+  nav a.active {
+    color: #4070ff; 
+  }
+
 
   nav a:hover {
     color: #4070ff;
@@ -169,13 +202,20 @@
   }
 
   .page-section {
-    min-height: 100vh; 
-    padding: 40px;
+    min-height: calc(100vh - 80px);
+    width: 100%;
+    padding: 60px 40px;
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
     border-bottom: 1px solid #eee;  
   }
 
+  .page-section > * {
+    width: 100%;
+    max-width: 1000px;
+  }
   html {
     scroll-behavior: smooth;
   }
