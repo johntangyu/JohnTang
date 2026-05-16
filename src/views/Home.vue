@@ -109,14 +109,12 @@ h3 {
 #getintouch {
     padding: 10px 20px;
     margin: 20px auto;
-
     font-size: 1em;
     font-family: 'garet', sans-serif;
     color: #fff;
     background-color: #1538a1;
     border: none;
     border-radius: 4px;
-
     cursor: pointer;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     transform: translateY(0);
