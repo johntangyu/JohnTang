@@ -21,10 +21,9 @@
     <section id="achievements" class="page-section">
       <Achievements />
     </section>
-    <section id="contact" class="page-section">
-      <Contact />
-    </section>
-  </main>
+  </main> 
+  
+  <footer>Built with Vue.js · Tang Yu John · Business Analytics, NUS</footer>
 </template>
 
 <script setup>
@@ -33,7 +32,6 @@
   import Experiences from './views/Experiences.vue';
   import Projects from './views/Projects.vue';
   import Achievements from './views/Achievements.vue';
-  import Contact from './views/Contact.vue';
 
   const navRef = ref(null);
   const indicatorStyle = ref({ width: '0px', left: '0px' });
@@ -216,7 +214,20 @@
     width: 100%;
     max-width: 1000px;
   }
+
   html {
     scroll-behavior: smooth;
   }
+
+  footer {
+      text-align:center; 
+      padding:2rem 5rem;
+      font-family:'garet',monospace; 
+      font-size:.8rem;
+      color:grey;
+      letter-spacing:.1em; 
+      word-spacing:0.2em;
+      color:var(--text-muted);
+      border-top:1px solid var(--border);
+    }
 </style>

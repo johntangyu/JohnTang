@@ -1,7 +1,9 @@
 <template>
   <div class="section-wrap" id="projects">
-    <div class="section-label">03 · Projects</div>
-    <h2 class="section-title">Things I've built.</h2>
+    <div class="section-label"> 
+        <a>03 · Projects</a>
+    </div>
+    <div class="section-title">Things I've built.</div>
 
     <div class="projects-grid">
         <div
@@ -19,8 +21,8 @@
             <div class="project-subtitle">{{ p.subtitle }}</div>
             <div class="project-summary">{{ p.summary }}</div>
             <div class="project-stack">
-            <span v-for="t in p.tech" :key="t" class="stack-tag">{{ t }}</span>
-          </div>
+                <span v-for="t in p.tech" :key="t" class="stack-tag">{{ t }}</span>
+            </div>
         </div>
       </div>
     </div>
@@ -49,7 +51,7 @@
                 </li>
             </ul>
 
-            <h3>Impact & Outtakes</h3>
+            <h3>Impact & Outcomes</h3>
             <p class="impact-txt">{{ selected.detail.impact }}</p>
         </div>
       </div>
@@ -74,76 +76,75 @@
                         id:1,
                         title: 'Olist E-Commerce Analytics',
                         subtitle: 'Descriptive & Prescriptive Analytics Data Dashboard',
-                        summary: 'End-to-end analytics solution on the Olist Brazilian e-commerce dataset — surfacing delivery bottlenecks, seller quality gaps, and revenue stagnation with actionable prescriptive recommendations via interactive Tableau dashboards.',
-                        tech: ['Tableau', 'Python', 'SQL', 'Pandas', 'NLP'],
+                        summary: 'End-to-end analytics solution on the Olist Brazilian e-commerce dataset, surfacing delivery bottlenecks, geographic disparities, and revenue stagnation with actionable prescriptive recommendations via interactive Tableau dashboards.',
+                        tech: ['Tableau', 'Python', 'SQL', 'Pandas', 'Descriptive Analytics', 'Prescriptive Analytics'],
                         visual: Olist,
                         detail: {
                             overview: 'A comprehensive analytics dashboard built on the Olist public e-commerce dataset from Brazil, covering 100,000+ orders across multiple product categories and seller regions. The project spans descriptive analytics to understand current operational performance, and prescriptive analytics to surface targeted improvement actions.',
                             features: [
-                            'Feature 1',
-                            'Feature 2',
-                            'Feature 3',
-                            'Feature 4',
-                            'Feature 5',
+                            'Delivery performance analysis, pinpointing geographic clusters with chronic delays and isolating root causes',
+                            'Revenue trend analysis with seasonal decomposition to identify growth stagnation',
+                            'Prescriptive recommendations on logistics optimisation and seller incentive structures',
+                            'Tableau dashboard with regional and categorical breakdowns, prioritising retention recommendations',
                             ],
-                            impact: 'Description and insights',
+                            impact: 'The analysis surfaced two underperforming product categories and the leading cause for customer dissatisfaction, late deliveries, with two states having the worst rates among others. Two potential states with existing robust logistical network were also identified for future expansion and further market penetration in Brazil. Prescriptive recommendations were packaged into a structured business improvement report.',
                         },
                         },
                         {
                         id:2,
                         title: 'Retail Recommendation Model',
-                        subtitle: 'Neural Collaborative Filtering & Multi-Architecture Benchmarking',
-                        summary: 'Enigneered and benchmarked five recommendation architectures — NCF, Matrix Factorisation, MLP, Two-Tower, and Multi-Branch Two-Tower — on the Dunnhumby retail dataset to determine the optimal approach for personalised product suggestions.',
-                        tech: ['Python', 'PyTorch', 'MLP', 'NCF', 'Matrix Factorisation', 'Two-Tower', 'Multi-Branch Two-Tower', 'Scikit-learn'],
+                        subtitle: 'Cold-Start Sensitive Personalised Recommender System',
+                        summary: 'Enigneered and benchmarked five recommendation architectures, NCF, Matrix Factorisation, MLP, Two-Tower, and Multi-Branch Two-Tower, on the Dunnhumby retail dataset to determine the optimal approach for personalised product suggestions.',
+                        tech: ['Python', 'Pandas', 'PyTorch',  'NumPy', 'Scikit-learn', 'Predictive Analytics'],
                         visual: Recommender,
                         detail: {
-                            overview: 'A machine learning research project benchmarking five recommendation architectures on the Dunnhumby retail dataset. The objective was to identify which architecture best personalises product suggestions for recurring and new retail shoppers, balancing predictive accuracy with computational efficiency. It paid closer attention to \'cold start\' performance for new users, incorporating additional user and item metadata into the Multi-Branch Two-Tower model.',
+                            overview: 'A machine learning research project benchmarking five recommendation architectures on the Dunnhumby retail dataset. The objective was to identify which architecture best personalises product suggestions for recurring and new retail shoppers, balancing predictive accuracy with computational efficiency. It paid closer attention to \'cold start\' performance for new users, incorporating additional user and item metadata the models.',
                             features: [
-                            'Feature 1',
-                            'Feature 2',
-                            'Feature 3',
-                            'Feature 4',
-                            'Feature 5',
+                            'Matrix Factorisation: classic latent factor decomposition as a performance baseline', 
+                            'Neural Collaborative Filtering (NCF): capturing user-item interaction patterns beyond linear dot-product similarity',
+                            'MLP with user/item feature embeddings: incorporating demographic and product metadata for richer representations',
+                            'Two-Tower architecture: independent user and item towers enabling scalable candidate retrieval',
+                            'Multi-Branch Two-Tower: auxiliary branches for enhanced feature interaction and improved cold-start performance',
                             ],
-                            impact: 'Description and insights',
+                            impact: 'The Multi-Layer Perceptron (MLP) model achieved a 95% accuracy in predicting new user purchase behaviours and a 93% accuracy for recurring users. This shows the model understands the underlying intent behind user actions with the prediction model potentially being able to drive higher initial engagement and reduce user churn.  ',
                         },
                         },
                         {
                         id:3,
                         title: 'SpendWise',
-                        subtitle: 'Grocery Price Intelligence & Community Deals Platform',
+                        subtitle: 'Grocery Price Comparison & Expenditure Tracker',
                         summary: 'A web application that identifies the cheapest grocery option for any shopping list across multiple supermarkets, tracks monthly household expenditure, and powers a community-driven deals sharing network.',
-                        tech: ['Vue.js', 'Python', 'Firebase', 'Web Scraping', 'Data Visualisation'],
+                        tech: ['Vue.js', 'Python', 'Firebase', 'Web Scraping', 'Data Visualisation', 'Descriptive Analytics'],
                         visual: Spendwise,
                         detail: {
-                            overview: 'SpendWise is a full-stack web application designed to help households make smarter grocery decisions. Users input their shopping list and the app aggregates real-time prices across major supermarket chains to surface the cheapest purchase combination. A social layer allows users to share flash deals and community-discovered discounts.',
+                            overview: 'SpendWise is a full-stack web application designed to help households make smarter grocery decisions. The platform integrates live supermarket product APIs to provide the cheapest purchase combination for a given shopping list. Users are also able to track their monthly expenses through spending analytics, providing better transparency and better budget planning. A social layer allows users to share flash deals and community-discovered discounts.',
                             features: [
-                            'Feature 1',
-                            'Feature 2',
-                            'Feature 3',
-                            'Feature 4',
-                            'Feature 5',
+                            'Smart grocery list input with personalisation based on supermarket preferences and distance to shops',
+                            'Real-time price comparison aggregated across multiple supermarket chains',
+                            'Saved shopping lists for easy replication of regular purchases',  
+                            'Monthly expenditure dashboard with trend tracking and personalised budget alerts',
+                            'Community deals board allowing users to post time-limited promotions and deals outside of major supermarket chains',
                             ],
-                            impact: 'Description and insights',
+                            impact: 'Web application was deployed and maintained on Firebase, allowing users to easily create accounts through email or Google authentication. Prices from Sheng Siong, Fairprice and Cold Storage can be accessed with the option to find the nearest store based on user location. Deals page also allows users to share annonymously with live updates based on expiry dates inputted.',
                         },
                         },
                         {
                         id:4,
                         title: 'Dietabetes',
-                        subtitle: 'Intelligent Blood Sugar Management & Prediction App',
+                        subtitle: 'Blood Sugar Management Mobile App',
                         summary: 'A patient-facing health app that tracks blood glucose levels, insulin dosages, and dietary intake, with predictive spike alerts generated from meal patterns and personal glucose history.',
-                        tech: ['React Native', 'Python', 'LSTM', 'MongoDB', 'Data Visualisation'],
+                        tech: ['React Native', 'Python', 'LSTM', 'MongoDB', 'Data Visualisation', 'Prescriptive Analytics'],
                         visual: Dietabetes,
                         detail: {
                             overview: 'Dietabetes is a mobile application for Type 1 and Type 2 diabetes patients. The core value proposition is proactive glucose control: giving patients predictive visibility over their blood sugar before spikes occur, rather than logging reactively after the fact. The app combines structured daily logging, trend visualisation, and ML-driven forecasting into a single application.',
                             features: [
-                            'Feature 1',
-                            'Feature 2',
-                            'Feature 3',
-                            'Feature 4',
-                            'Feature 5',
+                            'Blood glucose log with timestamping, and interactive trend charting',
+                            'Insulin dosage tracking with dose history and timely reminders based on prescribed timeline and predicted potential blood sugar spikes',
+                            'Meal-based spike prediction: the model learns each patient\'s individual glycaemic response over time',
+                            'Daily sugar intake dashboard visualising carbohydrate consumption against personalised targets',
+                            'Meal suggestions based on daily intake to help patients stay within target glucose levels',
                             ],
-                            impact: 'Dietabetes reframes diabetes management from reactive recording to proactive control. The predictive alert system is designed to give patients meaningful lead time before spikes occur, enabling corrective action through activity, hydration, or dietary adjustment before the event occurs. This project reflects a core belief: the best technology meaningfully improves people\'s daily quality of life.',
+                            impact: 'Diabetes management is reframed from reactive recording to proactive control. The predictive alert system is designed to give patients meaningful lead time before spikes occur, enabling corrective action through activity, hydration, or dietary adjustment before the event occurs. This project reflects a core belief: the best technology meaningfully improves people\'s daily quality of life.',
                         },
                     },
                 ],
@@ -204,6 +205,25 @@
         padding: 60px 20px;
     }
 
+    .section-title{
+        font-size: 2.25rem; 
+        letter-spacing: .08em; 
+        color: var(--text-muted); 
+        margin-bottom: 1.75rem;
+        padding-bottom: .75rem; 
+    }
+
+    .section-label {
+        font-family: 'garet', sans-serif; 
+        font-size: .85rem;
+        letter-spacing: .18em; 
+        text-transform: uppercase;
+        color: #4070ff;
+        margin-bottom: 1.25rem;
+        border-bottom: 1px solid var(--border);
+        width: 100%;
+    }
+
     .projects-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -237,6 +257,13 @@
 
     .project-card:hover {
         transform: translateY(-6px);
+    }
+
+    .project-num {
+        font-size: 0.85rem;
+        color: #4a70ff;
+        font-family: 'garet', monospace;
+        margin-bottom: 6px;
     }
 
     .project-modal-backdrop {
@@ -299,11 +326,53 @@
     }
 
     .visual-image {
+        display: block;
         width: 100%;
         height: 100%;
         object-fit: cover;
         border-radius: 0;
     }
+
+    .project-title{ 
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin: 10px 0 6px 0;
+        color: #16213e;
+        font-family: 'garet', sans-serif;
+    }
+
+    .project-subtitle {
+        font-size: 0.65rem;
+        color: #4a5568;
+        margin-bottom: 12px;
+        font-family: 'garet', sans-serif;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+    }
+
+    .project-summary{
+        font-size: 0.9rem;
+        color: #333;
+        line-height: 1.4;
+        margin-bottom: 15px;
+    }
+
+    .project-stack {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .stack-tag {
+        background: #f0f2f5;
+        color: #4a70ff;
+        font-family: 'garet', monospace;
+        padding: 6px 14px;
+        border-radius: 10px;
+        font-size: 0.65rem;
+        font-weight: 600;
+    }
+
     .animate-in {
         animation: modalSlideUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
     }
@@ -361,10 +430,14 @@
     }
 
     .enlarge-visual{
-        width: fit-content;
-        height: fit-content;
-        max-height: 200px;
-        object-fit: cover;
+        display: flex;
+        margin-top: -15px;
+        margin-right: -5px;
+        width: 100%;
+        height: 100%;
+        align-items: center;
+        justify-content: center;
+        object-fit: cover;  
     }
 
     .modal-body-content {
@@ -401,15 +474,16 @@
     .modal-tech-stack {
         display: flex;
         flex-wrap: wrap;
-        gap: 10px;
+        gap: 8px;
     }
 
     .modal-tag {
         background: #f0f2f5;
         color: #4a70ff;
+        font-family: 'garet', monospace;
         padding: 6px 14px;
         border-radius: 10px;
-        font-size: 0.85rem;
+        font-size: 0.75rem;
         font-weight: 600;
     }
 </style>

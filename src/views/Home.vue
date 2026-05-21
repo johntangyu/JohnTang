@@ -4,7 +4,7 @@
             <img :src="Photo" alt="John Tang" id="profile-photo"/>
             <div id="name">
                 <h1>Tang Yu John</h1>
-                <h3>Business Analytics, Major in Economics · NUS</h3>
+                <h3>Business Analytics, Second Major in Economics · NUS</h3>
                 <div id="description"> 
                 <p>
                     Hi there! I'm John, a passionate business analytics 
@@ -22,10 +22,19 @@
 
         <div id="skills">
             <h2>Skills</h2>
+            <div class="home-chips">
+                <span class="chip accent">Data Analytics</span>
+                <span class="chip accent">Machine Learning</span>
+                <span class="chip accent">Business Analysis</span>
+                <span class="chip accent">Product Management</span>
+                <span class="chip">Python · SQL · R</span>
+                <span class="chip">Tableau · Power BI</span>
+                <span class="chip">TensorFlow · PyTorch</span> 
+            </div>
         </div>
 
         <div id="socials">
-            <button id="getintouch">GET IN TOUCH</button>
+            <a href="mailto:johntangyu@gmail.com" class="btn-primary">Get in Touch →</a>
             <p>Socials</p>
         </div>
        
@@ -126,5 +135,61 @@ h3 {
     transform: translateY(-2px);
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
 }
+
+.home-chips { 
+    display:flex; 
+    flex-wrap:wrap; 
+    gap:.55rem; 
+    margin-bottom:2.5rem; 
+}
+
+.chip {
+    font-family:'JetBrains Mono',monospace; 
+    font-size:.65rem;
+    letter-spacing:.08em; 
+    padding:.38rem .8rem;
+    border:1px solid var(--border-strong); 
+    border-radius:100px;
+    color:var(--text-dim); 
+    text-transform:uppercase;
+}
+
+.chip.accent { 
+    border-color:var(--accent-border); 
+    color:var(--accent); 
+    background:var(--accent-soft); 
+}
+
+.hero-cta { 
+    display:flex;
+    gap:1rem; 
+    flex-wrap:wrap; 
+}
+
+.btn-primary {
+    display:inline-flex; 
+    align-items:center; 
+    gap:.5rem;
+    padding:.82rem 1.5rem; 
+    background:#1538a1; 
+    color:#ffffff;
+    font-family:'garet',monospace; 
+    font-size:.72rem;
+    letter-spacing:.1em; 
+    text-transform:uppercase;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    cursor:pointer;
+    text-decoration:none; 
+    transition:all .2s; 
+    font-weight:500;
+}
+
+.btn-primary:hover { 
+    background:#0d297a; 
+    transform:translateY(-1px); 
+}
+
 
 </style>
