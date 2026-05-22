@@ -125,7 +125,7 @@
                             'Monthly expenditure dashboard with trend tracking and personalised budget alerts',
                             'Community deals board allowing users to post time-limited promotions and deals outside of major supermarket chains',
                             ],
-                            impact: 'Web application was deployed and maintained on Firebase, allowing users to easily create accounts through email or Google authentication. Prices from Sheng Siong, Fairprice and Cold Storage can be accessed with the option to find the nearest store based on user location. Deals page also allows users to share annonymously with live updates based on expiry dates inputted.',
+                            impact: 'Web application was deployed and maintained on Firebase, allowing users to easily create accounts through email or Google authentication. Prices from Sheng Siong, Fairprice and Cold Storage can be accessed with the option to find the nearest store based on user location. Deals page also allows users to share anonymously with live updates based on expiry dates inputted.',
                         },
                         },
                         {
@@ -203,6 +203,8 @@
         max-width: 1200px;
         margin: 0 auto;
         padding: 60px 20px;
+        box-sizing: border-box;
+        max-width:1200px;
     }
 
     .section-title{
@@ -242,8 +244,13 @@
         transform: translateY(0);
     }
 
-    .reveal-d1 { transition-delay: 0.1s; }
-    .reveal-d2 { transition-delay: 0.25s; }
+    .reveal-d1 { 
+        transition-delay: 0.1s; 
+    }
+
+    .reveal-d2 { 
+        transition-delay: 0.25s; 
+    }
 
     .project-card {
         cursor: pointer;
@@ -388,7 +395,7 @@
         right: 20px;
         background: rgba(255, 255, 255, 0.2);
         border: none;
-        color: white;
+        color: rgb(181, 181, 181);
         font-size: 18px;
         width: 36px;
         height: 36px;
@@ -415,7 +422,6 @@
         margin: 2px 0 -45px 0;
         font-size: 2.2rem;
         color: #16213e;
-
     }
 
     .modal-subtitle {

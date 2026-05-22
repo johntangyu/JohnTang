@@ -1,169 +1,208 @@
 <template>
-    <div class="main-section">
-        <div class="title-label">
-            <a>02 · Experiences</a>
-        </div>
-        <div class="exp-layout">
-            <div class="exp-column">
-                <div class="exp-col-label">Where I've Been, What I've Learnt.</div>
-                
-                <div 
-                    v-for="(exp, i) in workExp" 
-                    :key="exp.id" 
-                    class="exp-card reveal" 
-                    :class="'reveal-d' + (i + 1)"
-                >
-                    <div class="exp-period">{{ exp.period }}</div>
-                    <div class="exp-title">{{ exp.title }}</div>
-                    <div class="exp-company">{{ exp.company }}</div>
-                    <div class="exp-desc">{{ exp.desc }}</div>
-                    <div class="exp-tags">
-                        <span 
-                            v-for="(t, tagIndex) in exp.tags" 
-                            :key="exp.id + '-tag-' + tagIndex" 
-                            class="exp-tag"
-                        >
-                            {{ t }}
-                        </span>
-                    </div>
-                </div>
+  <div class="section-wrap">
+    <main class="main-section">
+      <div class="title-label">
+        <a href="#experiences">02 · Experiences</a>
+      </div>
+      
+      <div class="header-inline">
+        <h2 class="section-title">Experience Highlights.</h2>
+      </div>
+      
+     <div class="experiences-timeline-list">
+        <div 
+          v-for="(exp, i) in workExp" 
+          :key="exp.id || i" 
+          class="exp-row-item reveal" 
+          :class="'reveal-d' + (i + 1)"
+        >
+
+          <div class="exp-right-column">
+            <span class="exp-period">{{ exp.period }}</span>
+            <h3 class="exp-title">{{ exp.title }}</h3>
+            <span class="exp-company">{{ exp.company }}</span>
+            <p class="exp-desc">{{ exp.desc }}</p>
+            <div class="exp-tags">
+              <span 
+                v-for="(tag, tagIndex) in exp.tags" 
+                :key="exp.id + '-tag-' + tagIndex" 
+                class="exp-tag"
+              >
+                {{ tag }}
+              </span>
             </div>
+          </div>
         </div>
-    </div>
+      </div>
+    </main>
+  </div>
 </template>
 
-
 <script>
-export default {
-        data() {
-            return {
-                activeSection: null,
-                selected: null,
-                workExp: [
-                    {
-                        id:1,
-                        title: 'BT1101 Teaching Assistant' ,
-                        company: 'NUS Information Systems and Analytics · Introduction to Business Analytics',
-                        period: 'Aug 2025 - May 2026',
-                        desc: 'Supported undergraduates through statistical modelling, data visualisation, and analytical reasoning in R for an entire academic year. Teaching analytics is the purest test of comprehension — you can only explain what you genuinely understand — and it sharpened my ability to translate complex quantitative outputs into clear, accessible insights.',
-                        tags: ['R Programming', 'Statistical Modelling', 'Data Visualisation', 'Descriptive Analytics', 'Prescriptive Analytics', 'Predictive Analytics', 'Communication'],
-                    },
-
-                    {
-                        id:2,
-                        title: 'Community & Partnerships Intern',
-                        company: 'Block71 · Startup Ecosystem',
-                        period: 'JULY - DEC 2025',
-                        desc: '',
-                        tags: ['Product Thinking', 'Stakeholder Management', 'Startup Ecosystem', 'Community Building'],
-                    },
-
-                    {
-                        id:3,
-                        title: 'Geography & History Teaching Intern',
-                        company: 'Hwa Chong Institution (High School) · Humanities Education',
-                        period: 'JAN - MAY 2024',
-                        desc: 'Independently taught 6 Geography classes and 2 special programme History classes for 1 Semester. Designed lesson plans and materialsfor diverse learners — an experience that crystallised the power of data storytelling: turning abstract information into narratives that people understand and act on.',
-                        tags: ['Curriculum Design', 'Presentation', 'Leadership', 'Structured Communication', 'Microsoft Office '],
-                    },
-
-                ],
-                }
-        }
-}
+    export default {
+    name: 'ExperiencesSection',
+    data() {
+        return {
+        workExp: [
+            {
+            id: 1,
+            title: 'BT1101 Teaching Assistant',
+            company: 'NUS Information Systems and Analytics · Introduction to Business Analytics',
+            period: 'Aug 2025 - May 2026',
+            desc: 'Supported undergraduates in statistical modelling, machine learning, data visualisation, and analytical reasoning in R, including techniques such as logistic regression and k-means clustering. Strengthened the ability to translate complex quantitative outputs into clear, accessible, and decision-oriented insights for diverse audiences.',
+            tags: ['R Programming', 'Statistical Modelling', 'Data Visualisation', 'Descriptive Analytics', 'Predictive Analytics', 'Communication'],
+            },
+            {
+            id: 2,
+            title: 'Community & Partnerships Intern',
+            company: 'BLOCK71 · Startup Ecosystem',
+            period: 'Jul - Dec 2025',
+            desc: 'Supported cross-border partnerships and ecosystem programmes involving both local and foreign stakeholders. Designed and executed engagement initiatives to improve awareness and participation in entrepreneurship and innovation activities.',
+            tags: ['Product Thinking', 'Stakeholder Management', 'Startup Ecosystem', 'Community Building'],
+            },
+            {
+            id: 3,
+            title: 'Geography & History Teaching Intern',
+            company: 'Hwa Chong Institution (High School) · Humanities Education',
+            period: 'Jan - May 2024',
+            desc: 'Independently managed curriculum delivery for 6 Geography and 2 Special Programme History classes, designing structured lessons tailored to diverse learning styles. Applied narrative-driven storytelling to communicate complex concepts clearly and improve student engagement.',
+            tags: ['Curriculum Design', 'Presentation', 'Leadership', 'Structured Communication', 'Microsoft Office'],
+            },
+        ],
+        };
+    }
+    }
 </script>
 
 <style>
-    .exp-layout { 
-        display:flex; 
-        flex-direction: column;
-        width: 100%;
-    }
 
-    .exp-col-label {
-        font-size: 2.25rem; 
-        letter-spacing: .08em; 
-        color: var(--text-muted); 
-        margin-bottom: 1.75rem;
-        padding-bottom: .75rem; 
+    .section-wrap {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+        box-sizing: border-box;
+        max-width:1200px;
     }
 
     .title-label {
-        font-family: 'garet', sans-serif; 
-        font-size: 0.85rem;
-        letter-spacing: .18em; 
-        margin-bottom: 1.25rem;
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+
+    .title-label a {
+        font-family: 'garet', sans-serif;
+        font-size: 0.8rem;
         text-transform: uppercase;
-        color: #4070ff; 
-        border-bottom: 1px solid var(--border);
-        width: 100%;
+        letter-spacing: 0.15em;
+        color: #4070ff;
+        text-decoration: none;
+        font-weight: 600;
+        display: inline-block;
     }
 
-    .exp-card {
-        padding: 1.6rem 1.75rem;
-        border: 1px solid var(--border); 
-        border-radius: var(--radius);
-        background: var(--bg-card); 
-        margin-bottom: 1.5rem;
-        transition: all .3s ease; 
-        position: relative; 
-        overflow: hidden;
-        width: 100%;
-        box-sizing: border-box;
+    .header-block {
+        margin-bottom: 2.5rem;
     }
 
-    .exp-card::before {
-        content: ''; 
-        position: absolute; 
-        top: 0; left: 0;
-        width: 3px; 
-        height: 100%; 
-        background: var(--accent);
-        transform: scaleY(0); 
-        transition: transform .3s ease;
-        transform-origin: bottom;
+    .section-title {
+        font-size: 2.2rem;
+        font-weight: 700;
+        letter-spacing: -0.02em;
+        color: #111827;
+        margin: 0;
+    }
+
+    .experiences-timeline-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0; 
+        margin-top: 3rem;
+    }
+
+    .exp-row-item {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        padding: 2rem 0;
+        border-bottom: 1px solid #e5e7eb; 
+    }
+
+    .exp-row-item:first-child {
+        padding-top: 0.5rem;
+    }
+
+    .exp-row-item:last-child {
+        border-bottom: none;
+    }
+
+    @media (min-width: 850px) {
+        .exp-row-item {
+            flex-direction: row;
+            gap: 3rem;
+        }
+        
+        .exp-left-column {
+            flex: 0 0 280px; 
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+        
+        .exp-right-column {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
     }
 
     .exp-period {
-        font-family:'garet',sans-serif; 
-        font-size:.62rem;
-        letter-spacing:.1em; 
-        color:var(--accent); margin-bottom:.5rem; 
-        text-transform:uppercase;
+        font-family: 'garet', sans-serif;
+        font-size: 0.75rem;
+        letter-spacing: 0.05em;
+        color: #4070ff;
+        text-transform: uppercase;
+        font-weight: 600;
+    }
+
+    .exp-company {
+        font-size: 0.88rem;
+        font-weight: 500;
+        color: #6b7280;
+        line-height: 1.4;
     }
 
     .exp-title {
-        font-family:'garet',sans-serif; 
-        font-size:1.5rem; 
-        font-weight:600; 
-        margin-bottom:.2rem; 
-    }
-    .exp-company { 
-        font-size:.85rem; 
-        color:var(--text-dim); 
-        margin-bottom:.9rem; 
+        font-family: 'garet', sans-serif;
+        font-size: 1.3rem;
+        font-weight: 600;
+        color: #111827;
+        margin: 0;
+        line-height: 1.2;
     }
 
-    .exp-desc { 
-        font-size:.9rem; 
-        line-height:1.75; 
-        color:var(--text-dim); 
-        margin-bottom:1rem; 
+    .exp-desc {
+        font-size: 0.92rem;
+        line-height: 1.6;
+        color: #4b5563;
+        margin: 0;
+        max-width: 97.7ch; 
     }
 
-    .exp-tags { 
-        display:flex; 
-        flex-wrap:wrap; 
-        gap:.4rem; 
+    .exp-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem;
+        margin-top: 0.25rem;
     }
 
     .exp-tag {
-        background: #f0f2f5;
-        color: #4a70ff;
-        font-family: 'garet', monospace;
-        padding: 6px 14px;
-        border-radius: 10px;
+        background: #f3f4f6;
+        color: #4070ff;
         font-size: 0.7rem;
         font-weight: 600;
+        padding: 0.25rem 0.6rem;
+        border-radius: 6px;
+        border: 1px solid #e5e7eb;
     }
 </style>

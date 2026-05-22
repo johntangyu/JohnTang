@@ -8,7 +8,7 @@
     <div class="nav-indicator" :style="indicatorStyle"></div>
   </nav>
 
-  <main>
+  <main class = "app-main">
     <section id="home" class="page-section">
       <Home />
     </section>
@@ -37,10 +37,13 @@
   const indicatorStyle = ref({ width: '0px', left: '0px' });
   const activeSection = ref('#home');
 
+  let isManualScrolling = false;
   let observer = null;
+  let scrollTimeout = null;
 
   const scrollTo = (selector) => {
     activeSection.value = selector;
+    isManualScrolling = true; 
     updateIndicator(); 
 
     const element = document.querySelector(selector);
@@ -50,6 +53,10 @@
         behavior: 'smooth'
       });
     }
+    if (scrollTimeout) clearTimeout(scrollTimeout);
+      scrollTimeout = setTimeout(() => {
+        isManualScrolling = false;
+    }, 800);
   };
 
   const updateIndicator = () => {
@@ -77,18 +84,15 @@
   const handleScroll = () => {
     if (isManualScrolling) return;
 
-    const sections = document.querySelectorAll('.page-section');
-    const scrollPosition = window.scrollY + 100;
+    const totalPageHeight = document.documentElement.scrollHeight;
+    const currentScrollPosition = window.scrollY + window.innerHeight;
 
-    sections.forEach(section => {
-      if (scrollPosition >= section.offsetTop && scrollPosition < section.offsetTop + section.offsetHeight) {
-        const id = `#${section.getAttribute('id')}`;
-        if (activeSection.value !== id) {
-          activeSection.value = id;
-          updateIndicator();
-        }
+    if (currentScrollPosition >= totalPageHeight - 10) {
+      if (activeSection.value !== '#achievements') {
+        activeSection.value = '#achievements';
+        updateIndicator();
       }
-    });
+    }
   };
 
   onMounted(async () => {
@@ -100,13 +104,17 @@
     
     updateIndicator();
     window.addEventListener('resize', updateIndicator);
+    window.addEventListener('scroll', handleScroll, { passive: true });
+
     const observerOptions = {
       root: null,
-      rootMargin: '-40% 0px -50% 0px',
+      rootMargin: '-20% 0px -60% 0px',
       threshold: 0
     };
 
     observer = new IntersectionObserver((entries) => {
+      if (isManualScrolling) return;
+
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           const id = `#${entry.target.getAttribute('id')}`;
@@ -123,7 +131,9 @@
 
   onUnmounted(() => {
     if (observer) observer.disconnect();
+    if (scrollTimeout) clearTimeout(scrollTimeout);
     window.removeEventListener('resize', updateIndicator);
+    window.removeEventListener('scroll', handleScroll);
   });
 </script>
 
@@ -195,24 +205,31 @@
     z-index: 1;
   }
 
-  main {
-    padding-top: 100px;
+  .app-main {
+    padding-top: 50px;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    justify-content: center;
+    width: 100%;
   }
 
   .page-section {
     min-height: calc(100vh - 80px);
     width: 100%;
-    padding: 60px 40px;
+    padding: 60px 24px;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center; 
     justify-content: flex-start;
-    border-bottom: 1px solid #eee;  
+    border-bottom: 1px solid #f3f4f6;
+    box-sizing: border-box;
   }
 
   .page-section > * {
     width: 100%;
-    max-width: 1000px;
+    max-width: 1100px;
+    margin: 0 auto;
   }
 
   html {
@@ -231,3 +248,4 @@
       border-top:1px solid var(--border);
     }
 </style>
+
