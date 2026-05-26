@@ -21,7 +21,7 @@
             <p>
                 I'm John, a Year 3 undergrad at NUS with a strong interest in data-driven product and 
                 business decision-making. I enjoy solving real-world problems by combining analytics, 
-                experimentation, and product thinking to build something that create measureable impact. 
+                experimentation, and product thinking to build something that creates measureable impact. 
                 Part of my past projects include a live grocery comparison platform and a recommendation 
                 model trained on 1.2 M+ retail transaction records. As a teaching assistant, I have also 
                 developed the ability to communicate analytical concepts clearly across varying technical 
